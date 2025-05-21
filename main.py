@@ -1,3 +1,4 @@
+import os
 import logging
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
@@ -55,13 +56,13 @@ def parse_input(text):
         nums = sorted(amount_groups[amt])
         summary_lines.append(f"{', '.join(map(str, nums))} into ₹{amt}")
 
-    result = "Groups:
-" + "\n".join(summary_lines) + f"\n\nOverall Total = ₹{total}"
+    result = "Groups:\n" + "\n".join(summary_lines) + f"\n\nOverall Total = ₹{total}"
     return result
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("👋 Welcome to Deep Brothers Bot!
-Send input like: 1,2 into 50 @ 3 into 20")
+    await update.message.reply_text(
+        "👋 Welcome to Deep Brothers Bot!\nSend input like: 1,2 into 50 @ 3 into 20"
+    )
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_input = update.message.text
@@ -69,7 +70,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(result)
 
 def main():
-    app = ApplicationBuilder().token("YOUR_BOT_TOKEN").build()
+    TOKEN = os.getenv("8027440712:AAFHYQES_IHGK8ORXqWII6rLR--InTmzQsU")
+    app = ApplicationBuilder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     app.run_polling()
