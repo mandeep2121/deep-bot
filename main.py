@@ -70,7 +70,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(result)
 
 def main():
-    TOKEN = os.getenv("8027440712:AAFHYQES_IHGK8ORXqWII6rLR--InTmzQsU")
+    TOKEN = os.getenv("7793916759:AAEmuOs2VemL0a7_Tby7iuP5t75jpkmgqwk")
     app = ApplicationBuilder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
